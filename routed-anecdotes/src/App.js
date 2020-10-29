@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Route ,useRouteMatch } from 'react-router-dom'
+import { Route, useRouteMatch } from 'react-router-dom'
 
 import { About } from './components/About'
 import { AnecdoteList } from './components/AnecdoteList'
 import { CreateNew } from './components/CreateNew'
-import { AnecdoteDetails }from './components/AnecdoteDetails'
+import { AnecdoteDetails } from './components/AnecdoteDetails'
 import { Container } from './components/Container'
 
 import './App.css'
@@ -39,7 +39,7 @@ const App = () => {
 
   const anecdoteById = (id) => anecdotes.find((a) => a.id === id)
 
-  const anecdote = match ? anecdoteById(match.params.id) :  undefined
+  const anecdote = match ? anecdoteById(match.params.id) : undefined
 
   const vote = (id) => {
     const anecdote = anecdoteById(id)
@@ -54,44 +54,31 @@ const App = () => {
   let idTimer = undefined
 
   const showNotification = (anecdote) => {
-
     setNotification(anecdote.content)
-    if (idTimer){
+    if (idTimer) {
       clearTimeout(idTimer)
     }
-    idTimer = setTimeout(() => setNotification(''),10000 )
+    idTimer = setTimeout(() => setNotification(''), 10000)
   }
   return (
-
     <div>
-
       <h1>Software anecdotes</h1>
 
-      <Container notification={notification} >
+      <Container notification={notification}>
         <Route path="/about">
           <About />
         </Route>
         <Route path="/create">
-
-          <CreateNew addNew={addNew}/>
-
+          <CreateNew addNew={addNew} />
         </Route>
-        <Route path='/anecdote/:id'>
-
-          <AnecdoteDetails anecdote={anecdote}/>
-
-
-
-
+        <Route path="/anecdote/:id">
+          <AnecdoteDetails anecdote={anecdote} />
         </Route>
         <Route path="/" exact>
-
           <AnecdoteList anecdotes={anecdotes} />
-
         </Route>
       </Container>
     </div>
-
   )
 }
 
