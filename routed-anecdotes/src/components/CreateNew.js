@@ -17,7 +17,7 @@ export const CreateNew = (props) => {
       info,
       votes: 0,
     })
-    console.log(history)
+
     history.push('/')
 
   }
