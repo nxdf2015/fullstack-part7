@@ -3,9 +3,6 @@ import { useHistory } from 'react-router-dom'
 
 import { useField } from '../hooks/field'
 export const CreateNew = (props) => {
-  // const [content, setContent] = useState('')
-  // const [author, setAuthor] = useState('')
-  // const [info, setInfo] = useState('')
 
   const info = useField('info')
   const content = useField('info')
