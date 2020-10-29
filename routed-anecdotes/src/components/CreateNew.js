@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { useField } from '../hooks/field'
@@ -23,10 +23,16 @@ export const CreateNew = (props) => {
     history.push('/')
   }
 
+  const reset = () => {
+    content.reset()
+    author.reset()
+    info.reset()
+  }
+
   return (
     <div>
       <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onReset={reset}>
         <div>
           content
           <input {...content} />
@@ -36,10 +42,11 @@ export const CreateNew = (props) => {
           <input {...author} />
         </div>
         <div>
-          url for mre info
+          url for more info
           <input {...info} />
         </div>
-        <button>create</button>
+        <input type='submit' value='create'/>
+        <input type="reset" value='reset'/>
       </form>
     </div>
   )
