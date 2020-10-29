@@ -1,0 +1,9 @@
+.display-notification {
+    visibility: visible;
+    padding : 5px;
+    border: 2px solid;
+}
+
+.hide-notification {
+    visibility: hidden;
+}

@@ -7,6 +7,7 @@ import { CreateNew } from './components/CreateNew'
 import { AnecdoteDetails }from './components/AnecdoteDetails'
 import { Container } from './components/Container'
 
+import './App.css'
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
     {
@@ -27,15 +28,18 @@ const App = () => {
 
   const match = useRouteMatch('/anecdote/:id')
 
-  const anecdote = match ? anecdotes.find(item => item.id === match.params.id) :  undefined
   const [notification, setNotification] = useState('')
 
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
+    console.log(anecdote)
     setAnecdotes(anecdotes.concat(anecdote))
+    showNotification(anecdote)
   }
 
   const anecdoteById = (id) => anecdotes.find((a) => a.id === id)
+
+  const anecdote = match ? anecdoteById(match.params.id) :  undefined
 
   const vote = (id) => {
     const anecdote = anecdoteById(id)
@@ -47,34 +51,45 @@ const App = () => {
 
     setAnecdotes(anecdotes.map((a) => (a.id === id ? voted : a)))
   }
+  let idTimer = undefined
 
+  const showNotification = (anecdote) => {
+
+    setNotification(anecdote.content)
+    if (idTimer){
+      clearTimeout(idTimer)
+    }
+    idTimer = setTimeout(() => setNotification(''),10000 )
+  }
   return (
 
     <div>
+
       <h1>Software anecdotes</h1>
 
-      <Route path="/about">
-        <Container>
+      <Container notification={notification} >
+        <Route path="/about">
           <About />
-        </Container>
-      </Route>
-      <Route path="/create">
-        <Container>
-          <CreateNew addNew={addNew} />
-        </Container>
-      </Route>
-      <Route path='/anecdote/:id'>
-        <Container>
+        </Route>
+        <Route path="/create">
+
+          <CreateNew addNew={addNew}/>
+
+        </Route>
+        <Route path='/anecdote/:id'>
+
           <AnecdoteDetails anecdote={anecdote}/>
 
-        </Container>
 
-      </Route>
-      <Route path="/" exact>
-        <Container>
+
+
+        </Route>
+        <Route path="/" exact>
+
           <AnecdoteList anecdotes={anecdotes} />
-        </Container>
-      </Route>
+
+        </Route>
+      </Container>
     </div>
 
   )
