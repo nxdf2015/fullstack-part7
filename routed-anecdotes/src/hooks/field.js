@@ -5,5 +5,5 @@ export const useField = (label , type = 'text') => {
   const name = label
   const onChange = (event) => setValue(event.target.value)
   const reset = () => setValue('')
-  return { type , name , onChange, value ,reset }
+  return { input : { type , name , onChange, value } ,reset }
 }

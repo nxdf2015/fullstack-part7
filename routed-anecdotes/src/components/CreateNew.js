@@ -35,15 +35,15 @@ export const CreateNew = (props) => {
       <form onSubmit={handleSubmit} onReset={reset}>
         <div>
           content
-          <input {...content} />
+          <input {...content.input} />
         </div>
         <div>
           author
-          <input {...author} />
+          <input {...author.input} />
         </div>
         <div>
           url for more info
-          <input {...info} />
+          <input {...info.input} />
         </div>
         <input type='submit' value='create'/>
         <input type="reset" value='reset'/>
