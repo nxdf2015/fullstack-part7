@@ -17,7 +17,7 @@ const useField = (type) => {
   }
 }
 
-const baseUrl = '/api/notes'
+
 
 const useResource = (baseUrl) => {
   const [resources, setResources] = useState([])
