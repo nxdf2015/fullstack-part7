@@ -35,7 +35,7 @@ const notify  = typeNotification => (message, delay = 1000) => dispatch => {
   dispatch(typeNotification(message))
 
   if (idTimeout){
-    clearTimeout(idTimeout)
+
     dispatch(resetNotification())
   }
 
