@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
+import { useDispatch ,useSelector } from 'react-redux'
 
 import { updateLike, removeBlog } from '../blogs/actions'
-const Blog = ({ blog }) => {
+import { toggleDetails } from '../display/actions'
+const Blog = ({ blog  }  ) => {
 
   const dispatch = useDispatch()
-  const [detailsVisible, setVisible] = useState(false)
 
+
+  const state = useSelector(state => state)
+
+  console.log(state)
+  const detailsVisible = useSelector(state => state.display[blog.id]  || false)
 
 
   const handlerLike = () => dispatch(updateLike(blog))
@@ -20,9 +25,11 @@ const Blog = ({ blog }) => {
 
   return (
     <div className='blog-container'>
-      {detailsVisible ? <BlogDetails {...blog} handlerLike={handlerLike} /> : <div className='blog-info'>{blog.title}</div>}
+      {detailsVisible ?
+        <BlogDetails {...blog} handlerLike={handlerLike} /> : <div className='blog-info'>{blog.title}</div>}
 
-      <button className='btn-view' onClick={() => setVisible((visible) => !visible)}>
+
+      <button className='btn-view' onClick={() => dispatch(toggleDetails(blog.id))}>
         {detailsVisible ? 'hidde' : 'view'}
       </button>
 

@@ -37,7 +37,9 @@ export const addBlog = blog => dispatch => {
 }
 
 export const removeBlog = blog => dispatch => {
+
   blogService.remove(blog).then(() =>  {
+
     const id = blog.id
     dispatch(removeBlogStore(id))
     dispatch(successNotification(`remove ${blog.title} by ${blog.author}`))
@@ -55,10 +57,12 @@ export const removeBlog = blog => dispatch => {
 
 export const updateLike =  blog  => dispatch => {
   blogService.updateLike(blog).then((response) => {
-    const id = response.data.id
+    const id = response.id
     dispatch(updateLikeStore(id))
 
   })
 }
 
 export const getALL = () => dispatch =>     blogService.getAll().then((blogs) => dispatch(getAllBlog(blogs)))
+
+
