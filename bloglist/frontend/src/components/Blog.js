@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { updateLike, removeBlog } from '../blogs/actions'
+const Blog = ({ blog }) => {
 
-const Blog = ({ blog , updateLike, removeBlog }) => {
-
-
+  const dispatch = useDispatch()
   const [detailsVisible, setVisible] = useState(false)
 
 
 
-  const handlerLike = () => updateLike(blog)
+  const handlerLike = () => dispatch(updateLike(blog))
 
 
   const handlerRemove = () => {
     if (window.confirm(`remove ${blog.title} by ${blog.author}`)){
-      removeBlog(blog)
+      dispatch(removeBlog(blog))
     }
   }
 

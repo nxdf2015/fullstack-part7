@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { addBlog } from '../blogs/actions'
 const defaultBlog = { title: '', author: '', url: '' }
 
-const CreateBlog =  ({ addBlog ,toogleVisibility }) => {
+const CreateBlog =  ({ toogleVisibility }) => {
+  const dispatch = useDispatch()
   const [blog, setBlog] = useState({ title: '', author: '', url: '' })
 
   const handleCreate =  (event) => {
     event.preventDefault()
-    addBlog(blog)
+    dispatch(addBlog(blog))
     toogleVisibility()
     setBlog(defaultBlog)
 
@@ -16,7 +19,7 @@ const CreateBlog =  ({ addBlog ,toogleVisibility }) => {
 
   return (
     <div>
-      <h1>create new</h1>
+      <h1>create new Blog</h1>
       <form data-test="create-form"onSubmit={handleCreate}>
         <div>
           <label>

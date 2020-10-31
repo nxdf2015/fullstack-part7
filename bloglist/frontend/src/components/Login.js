@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-const Login = ({ setLogin, setLogOut, isLogged }) => {
+import { setLogOut,setLogin } from '../login/actions'
+
+const Login = () => {
   const [user, setUser] = useState({ username: '', password: '' })
-
+  const dispatch = useDispatch()
+  const isLogged = useSelector(state => state.login.logged)
   const handlerLog = ({ target }) => {
     setUser((user) => ({ ...user, [target.name]: target.value }))
   }
@@ -10,7 +14,7 @@ const Login = ({ setLogin, setLogOut, isLogged }) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    setLogin(user)
+    dispatch(setLogin(user))
 
     setUser((user) => ({ ...user, password: '' }))
   }
@@ -18,7 +22,7 @@ const Login = ({ setLogin, setLogOut, isLogged }) => {
 
 
   const logout = () => {
-    setLogOut()
+    dispatch(setLogOut())
   }
 
   return (
