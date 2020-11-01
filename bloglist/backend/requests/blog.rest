@@ -10,9 +10,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhlb
 ### create a blog without likes
 post http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxhcyIsImlkIjoiNWY4ZWVhYTI1ZTUzN2YwZmE0OWNjZGQ1IiwiaWF0IjoxNjAzMjAxNzY5fQ.fwWVcl1lgIeiEnS4MzuaiXtsp9Zx5ET0GAJGJuvj7Zs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxhcyIsImlkIjoiNWY5ZDc1ZjFlYTg5Y2Q2Nzk4NGM1NDUyIiwiaWF0IjoxNjA0MjQ5MDc5fQ.-rUpTWYBgf5mVzhgKQhRejzpvVSFXN6SOnO6EZac0bo
 
 {"title":"second post", "author":"alfred","url":"http://localhost"}
+
 
 ### get all blogs
 
