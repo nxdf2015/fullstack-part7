@@ -30,7 +30,7 @@ router.get('/', async (request, response) => {
   const result = await Blog.find(
     {},
     { title: 1, url: 1, author: 1, likes: 1, user: 1 }
-  ).populate('user', { username: 1, name: 1, _id: 0 })
+  ).populate('user', { username: 1, name: 1, _id: 1 })
 
   response.status(200).json(result)
 })
