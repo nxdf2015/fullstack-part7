@@ -9,13 +9,18 @@ const BlogDetails = ({ id  }) => {
   const blog = useSelector(state => state.blogs.find(blog => blog.id === id ))
   const handlerLike = () => dispatch(updateLike(blog))
 
-  const  { title, author, likes ,url , user : { name } } =blog
+  const  { title, author, likes ,url , comments  , user : { name } } =blog
 
   return (<div className="blog-details">
     <h2>{title} {author}</h2>
     <a href={url}>{url}</a>
     <div>likes  {likes} <button className='btn-like' onClick={handlerLike}>like</button></div>
     <div>added by {name} </div>
+    <h2>comments</h2>
+    <ul>
+      {comments.map(comment => <li key={id}>{comment}</li>)}
+
+    </ul>
   </div>
   )}
 

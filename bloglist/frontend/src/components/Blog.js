@@ -19,6 +19,8 @@ const Blog = ({ blog }) => {
       <Link to={`/blogs/${blog.id}`}>
         <div className="blog-info">{blog.title}</div>
       </Link>
+
+
       <button onClick={handlerRemove}>remove</button>
     </div>
   )
