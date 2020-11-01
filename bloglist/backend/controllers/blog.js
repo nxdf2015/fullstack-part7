@@ -29,7 +29,7 @@ router.get('/:id', async (request, response) => {
 router.get('/', async (request, response) => {
   const result = await Blog.find(
     {},
-    { title: 1, url: 1, author: 1, likes: 1, user: 1 ,comments : 1 }
+    { title: 1, url: 1, author: 1, likes: 1, user: 1, comments: 1 }
   ).populate('user', { username: 1, name: 1, _id: 1 })
 
   response.status(200).json(result)
@@ -55,31 +55,27 @@ router.post('/', middleware.verifyToken, async (request, response) => {
   response.status(200).json(result)
 })
 
-router.patch(
-  '/:id/like',
-
-  async (request, response) => {
-    const { id  } = request.params
-    const likes = request.body.likes
-    const result = await Blog.findByIdAndUpdate(
-      id,
-      { $set: { likes: likes } },
-      { new: true, overwrite: true, runValidators: true }
-    )
-    response.status(200).json(result)
-  }
-)
-
-router.patch('/:id/comments', middleware.verifyToken,async (request,response) => {
-  const id =request.params.id
-  const comment = request.body.comment
-  const result = await Blog.findByIdAndUpdate(id,
-    { $push:{ comments : comment } },
-    { new: true, overwrite: true, runValidators: true })
+router.patch('/:id/like', middleware.verifyToken, async (request, response) => {
+  const { id } = request.params
+  const likes = request.body.likes
+  const result = await Blog.findByIdAndUpdate(
+    id,
+    { $set: { likes: likes } },
+    { new: true, overwrite: true, runValidators: true }
+  )
   response.status(200).json(result)
 })
 
-
+router.patch('/:id/comment', async (request, response) => {
+  const id = request.params.id
+  const comment = request.body.comment
+  const result = await Blog.findByIdAndUpdate(
+    id,
+    { $push: { comments: comment } },
+    { new: true, overwrite: true, runValidators: true }
+  )
+  response.status(200).json(result)
+})
 
 router.put('/:id', middleware.verifyToken, async (request, response) => {
   const id = request.params.id
