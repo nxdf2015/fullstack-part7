@@ -2,6 +2,11 @@ import axios from 'axios'
 
 const url_api = 'http://localhost:3001/api'
 
+const getAll = async () => {
+  const users = await axios.get(`${url_api}/users`)
+
+  return users.data
+}
 
 const create =  async ({ username , password }) => {
 
@@ -21,4 +26,4 @@ const decodeToken = async (token) => {
 }
 
 
-export default  { create ,decodeToken }
+export default  { create ,decodeToken ,getAll }

@@ -50,3 +50,12 @@
   padding: 0.5rem;
 
 }
+
+nav {
+  display:flex;
+  padding : 8px;
+  background: grey;
+}
+nav > * {
+  margin : 8px;
+}

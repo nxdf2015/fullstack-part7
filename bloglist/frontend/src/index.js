@@ -4,5 +4,12 @@ import { Provider } from 'react-redux'
 
 import store from './redux/store'
 import App from './App'
-
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))
+import { BrowserRouter as Router } from 'react-router-dom'
+ReactDOM.render(
+  <Provider store={store}>
+    <Router basename='/'>
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+)

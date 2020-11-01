@@ -1,30 +1,27 @@
-import React   from 'react'
+import React, { useState } from 'react'
 
-
-import { useSelector  } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import Blog from './Blog'
+import CreateBlog from './CreateBlog'
 
-const Blogs = ({ sorted }) => {
-  const blogs = useSelector(state => state.blogs)
-
-
-
-
-
+const Blogs = () => {
+  const blogs = useSelector((state) => state.blogs)
+  const [sorted, setSorted] = useState(false)
 
   if (sorted) {
     blogs.sort((a, b) => (a.likes < b.likes ? 1 : -1))
   }
-  return  <div data-test="list-blog">
 
-    {
-
-      blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog}/>))}
-  </div>
-
+  return (
+    <div data-test="list-blog">
+      <CreateBlog/>
+      {!sorted && <button onClick={() => setSorted(true)}>sort by likes</button>}
+      {blogs.map((blog) => (
+        <Blog key={blog.id} blog={blog} />
+      ))}
+    </div>
+  )
 }
-
 
 export default Blogs

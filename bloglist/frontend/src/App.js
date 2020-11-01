@@ -1,42 +1,49 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch  } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
 
 import Blogs from './components/Blogs'
-import CreateBlog from './components/CreateBlog'
-import Login from './components/Login'
-import Notification from './components/Notification'
 
-import { getALL } from './blogs/actions'
-import { getToken } from './login/actions'
+import Notification from './components/Notification'
+import Users from './components/Users'
+import Navigation from './components/Navigation'
+
+import * as blogActions from './blogs/actions'
+import * as loginActions from './login/actions'
+import * as usersActions from './users/actions'
 
 import './App.css'
-
+import UserBlog from './components/UserBlog'
+import BlogDetails from './components/BlogDetails'
 const App = () => {
   const dispatch = useDispatch()
 
-  const [sorted, setSorted] = useState(false)
-
   useEffect(() => {
-    dispatch(getALL())
-  }, [dispatch])
-
-  useEffect(() => {
-    dispatch(getToken())
-
-  }, [dispatch])
-
-  const handleSortBlog = () => {
-    setSorted(true)
-  }
+    dispatch(blogActions.getAll())
+    dispatch(usersActions.getAll())
+    dispatch(loginActions.getToken())
+  }, [])
 
   return (
     <div>
-      <Login />
-      <h2>blogs</h2>
+      <Navigation />
+
+      <h2>Blog App</h2>
       <Notification />
-      <CreateBlog />
-      <button onClick={handleSortBlog}>sort by like</button>
-      <Blogs sorted={sorted} />
+
+
+      <Switch>
+        <Route path="/users/:id">
+          {({ match: { params } }) => <UserBlog {...params} />}
+        </Route>
+        <Route path="/users" component={Users} />
+        <Route path="/blogs/:id">
+          {({ match: { params } }) => <BlogDetails {...params} />}
+        </Route>
+        <Route to="/">
+          <Blogs />
+        </Route>
+      </Switch>
     </div>
   )
 }
