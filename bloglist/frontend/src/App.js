@@ -15,6 +15,7 @@ import * as usersActions from './users/actions'
 import './App.css'
 import UserBlog from './components/UserBlog'
 import BlogDetails from './components/BlogDetails'
+
 const App = () => {
   const dispatch = useDispatch()
 
@@ -22,7 +23,7 @@ const App = () => {
     dispatch(blogActions.getAll())
     dispatch(usersActions.getAll())
     dispatch(loginActions.getToken())
-  }, [])
+  }, [dispatch])
 
   return (
     <div>

@@ -18,6 +18,8 @@ const reducer = (state = default_state,action) => {
     return state.filter(blog => blog.id !== action.id)
   case names.UPDATE_LIKE_BLOG:
     return state.map(blog => blog.id === action.id ? ( { ...blog, likes : blog.likes + 1 } ): blog)
+  case names.ADD_COMMENT:
+    return state.map(blog => blog.id === action.id ? ({ ...blog , comments : [...blog.comments , action.comment] }):blog)
   default:
     return state
 

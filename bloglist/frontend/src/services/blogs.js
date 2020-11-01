@@ -22,7 +22,18 @@ const updateLike = async (blog) => {
   const response = await axios({
     method: 'PATCH',
     url: baseUrl + '/' + blog.id + '/like',
-    data: { blog, likes: blog.likes + 1 },
+    //data: { blog, likes: blog.likes + 1 },
+    data: { likes: blog.likes + 1 },
+  })
+  return response
+}
+
+const addComment = async (id,comment) => {
+  console.log(id,'id---------------comment',comment)
+  const response = await  axios({
+    url: baseUrl+'/'+id+'/comment',
+    method: 'PATCH',
+    data:{ comment:comment }
   })
   return response
 }
@@ -38,4 +49,4 @@ const remove = async (blog) => {
   return response
 }
 
-export default { getAll, create, updateLike, remove }
+export default { getAll, create, updateLike, remove ,addComment }

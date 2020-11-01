@@ -1,26 +1,32 @@
 import blogService from '../services/blogs'
 
-import { ADD_BLOG, UPDATE_LIKE_BLOG, REMOVE_BLOG, GET_ALL_BLOG } from './names'
+import * as names from './names'
 import { successNotification, errorNotification } from '../notification/action'
 
 const addBlogStore = (data) => ({
-  type: ADD_BLOG,
+  type: names.ADD_BLOG,
   data,
 })
 
 const getAllBlog = (data) => ({
-  type: GET_ALL_BLOG,
+  type: names.GET_ALL_BLOG,
   data,
 })
 
 const updateLikeStore = (id) => ({
-  type: UPDATE_LIKE_BLOG,
+  type: names.UPDATE_LIKE_BLOG,
   id,
 })
 
 const removeBlogStore = (id) => ({
-  type: REMOVE_BLOG,
+  type: names.REMOVE_BLOG,
   id,
+})
+
+export const addCommentStore = (id,comment) => ({
+  type: names.ADD_COMMENT,
+  comment,
+  id
 })
 
 export const addBlog = (blog) => (dispatch) => {
@@ -70,3 +76,11 @@ export const updateLike = (blog) => (dispatch) => {
 
 export const getAll = () => (dispatch) =>
   blogService.getAll().then((blogs) => dispatch(getAllBlog(blogs)))
+
+export const addComment = (id,comment) => dispatch => {
+  console.log('action add comment', comment,id)
+  blogService.addComment(id,comment)
+    .then(() => {
+      dispatch(addCommentStore(id,comment))
+    })
+}
