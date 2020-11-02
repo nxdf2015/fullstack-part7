@@ -55,7 +55,7 @@ router.post('/', middleware.verifyToken, async (request, response) => {
   response.status(200).json(result)
 })
 
-router.patch('/:id/like', middleware.verifyToken, async (request, response) => {
+router.patch('/:id/like', async (request, response) => {
   const { id } = request.params
   const likes = request.body.likes
   const result = await Blog.findByIdAndUpdate(

@@ -4,6 +4,12 @@ Content-Type: application/json
 {"username":"hellas","name":"arto hellas", "password" : "secret"}
 
 ###
+post http://localhost:3001/api/users
+Content-Type: application/json
+
+{"username":"xavier","name":"xavier", "password" : "secret"}
+
+###
 
 get http://localhost:3001/api/users
 
