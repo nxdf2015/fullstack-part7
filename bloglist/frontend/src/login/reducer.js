@@ -1,6 +1,6 @@
 import * as names from './names'
 
-const default_state = { token : localStorage.getItem('token') , username : ''  , logged : false }
+const default_state = { token : localStorage.getItem('token') , username : ''  , logged : false ,showForm:false }
 
 const reducer = (state = default_state,action) => {
   switch(action.type){
@@ -14,6 +14,10 @@ const reducer = (state = default_state,action) => {
     return { ...state,logged:false }
   case names.SET_USER:
     return { ...state , username:action.username }
+  case names.SHOW_LOGIN_FORM:
+    return { ...state,showForm:true }
+  case names.HIDE_LOGIN_FORM:
+    return { ...state, showForm:false }
   default:
     return state
   }

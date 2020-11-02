@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux'
 import Blog from './Blog'
 import CreateBlog from './CreateBlog'
 
+import ListGroup from 'react-bootstrap/ListGroup'
+import Button from 'react-bootstrap/Button'
+
 const Blogs = () => {
   const blogs = useSelector((state) => state.blogs)
   const [sorted, setSorted] = useState(false)
@@ -15,12 +18,18 @@ const Blogs = () => {
 
   return (
     <div data-test="list-blog">
-      <CreateBlog/>
-      {!sorted && <button onClick={() => setSorted(true)}>sort by likes</button>}
-      {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
-      ))}
 
+      <Button variant='outline-primary' className="m-2" as={CreateBlog}>CreateBlog</Button>
+      {!sorted && (
+        <Button variant='outline-primary'   className="m-2"  onClick={() => setSorted(true)}>sort by likes</Button>
+      )}
+
+      {/* <CreateBlog /> */}
+      <ListGroup>
+        {blogs.map((blog) => (
+          <Blog key={blog.id} blog={blog} />
+        ))}
+      </ListGroup>
     </div>
   )
 }

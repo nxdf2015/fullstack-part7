@@ -12,10 +12,12 @@ import * as blogActions from './blogs/actions'
 import * as loginActions from './login/actions'
 import * as usersActions from './users/actions'
 
-import './App.css'
 import UserBlog from './components/UserBlog'
 import BlogDetails from './components/BlogDetails'
 
+import Container from 'react-bootstrap/Container'
+
+import FormLogin from './components/FormLogin'
 const App = () => {
   const dispatch = useDispatch()
 
@@ -29,22 +31,24 @@ const App = () => {
     <div>
       <Navigation />
 
-      <h2>Blog App</h2>
       <Notification />
 
+      <FormLogin/>
 
-      <Switch>
-        <Route path="/users/:id">
-          {({ match: { params } }) => <UserBlog {...params} />}
-        </Route>
-        <Route path="/users" component={Users} />
-        <Route path="/blogs/:id">
-          {({ match: { params } }) => <BlogDetails {...params} />}
-        </Route>
-        <Route to="/">
-          <Blogs />
-        </Route>
-      </Switch>
+      <Container fluid>
+        <Switch>
+          <Route path="/users/:id">
+            {({ match: { params } }) => <UserBlog {...params} />}
+          </Route>
+          <Route path="/users" component={Users} />
+          <Route path="/blogs/:id">
+            {({ match: { params } }) => <BlogDetails {...params} />}
+          </Route>
+          <Route to="/">
+            <Blogs />
+          </Route>
+        </Switch>
+      </Container>
     </div>
   )
 }

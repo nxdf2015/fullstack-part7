@@ -12,7 +12,15 @@ const setUser = ({ username }) => ({
   username,
 })
 
-export const getToken = () => (dispatch,getState) => {
+export const showLoginForm = () => ({
+  type: names.SHOW_LOGIN_FORM,
+})
+
+export const hideLoginForm  = () => ({
+  type:names.HIDE_LOGIN_FORM
+})
+
+export const getToken = () => (dispatch, getState) => {
   const token = getState().login.token
   if (token) {
     usersService
@@ -31,7 +39,7 @@ export const getToken = () => (dispatch,getState) => {
 }
 
 export const setToken = (token) => {
-  localStorage.setItem('token',token)
+  localStorage.setItem('token', token)
   return { type: names.SET_TOKEN, token }
 }
 
